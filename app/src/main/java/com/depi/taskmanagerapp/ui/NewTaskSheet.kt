@@ -1,5 +1,6 @@
 package com.depi.taskmanagerapp.ui
 
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -58,6 +59,7 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
         return calender
     }
 
+    @SuppressLint("DefaultLocale")
     private fun updateTimeButtonText() {
         val calender = getCalenderFromDueTime()
         binding.timePickerButton.text = String.format(
@@ -84,13 +86,13 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
             dueTime = newCal.time
             updateTimeButtonText()
         }
-        val is24Hour = DateFormat.is24HourFormat(activity) // Automatically uses 12/24hr setting
+        val is24Hour = DateFormat.is24HourFormat(activity)
         val dialog = TimePickerDialog(
             activity,
             listener,
             dialogCalendar.get(Calendar.HOUR_OF_DAY),
             dialogCalendar.get(Calendar.MINUTE),
-            is24Hour // This makes it respect the user's phone settings
+            is24Hour
         )
         dialog.setTitle("Task Time")
         dialog.show()
